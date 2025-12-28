@@ -8,7 +8,7 @@
 <style>
 body{font-family:Arial;background:#f1f5f9;padding:20px}
 h1{text-align:center}
-.folder{background:#0ea5e9;color:#fff;padding:8px;margin:6px 0;border-radius:6px;cursor:pointer}
+.folder{background:#0ea5e9;color:#fff;padding:8px;margin:6px 0;border-radius:6px;cursor:pointer;display:none;}
 .subfolder{display:none;margin-left:20px}
 .link{display:none;margin:6px 0}
 .payment-box{background:#fef3c7;padding:15px;border-radius:10px;text-align:center;margin-bottom:20px}
@@ -16,7 +16,7 @@ button{background:#22c55e;border:none;color:white;padding:8px 14px;border-radius
 input{padding:8px;width:180px}
 .show-pass-btn{background:#3b82f6;color:#fff;border:none;padding:8px;border-radius:6px}
 a{text-decoration:none;font-weight:bold}
-#searchBox{display:none;margin:15px 0;padding:8px;width:95%}
+#searchBox{display:none;margin:15px 0;padding:8px;width:95%;}
 
 /* AI Button */
 #aiBtn{
@@ -92,37 +92,20 @@ Amount: 5 টাকা <br><br>
   <div class="folder" onclick="toggle('m1')">🎬 Chainsaw Man The Movie Reze Arc</div>
   <div class="subfolder" id="m1">
     <div class="link unlock">
-      <a href="https://drive.google.com/file/d/1iGwkL4uV_bWVWlUMjtw7ZQ32wmr4W8c1/preview?usp=sharing">▶ ভিডিও দেখো</a> | <a href="https://drive.google.com/file/d/1iGwkL4uV_bWVWlUMjtw7ZQ32wmr4W8c1/view?usp=sharing">⬇ ডাউনলোড</a>
+      <a href="https://drive.google.com/file/d/1iGwkL4uV_bWVWlUMjtw7ZQ32wmr4W8c1/preview?usp=sharing">▶ ভিডিও দেখো</a> | 
+      <a href="https://drive.google.com/file/d/1iGwkL4uV_bWVWlUMjtw7ZQ32wmr4W8c1/view?usp=sharing">⬇ ডাউনলোড</a>
     </div>
   </div>
 
-<div class="folder" onclick="toggle('m2')">🎬 Demon Slayer Kimetsu no Yaiba Infinity Castle</div>
-<div class="subfolder" id="m2">
-  <div class="link unlock">
-    <a href="https://drive.google.com/file/d/1bdYi--odkqzKs8DWvCNNB41fpt-e8EYe/preview?usp=sharing" target="_blank">
-      ▶ ভিডিও দেখো
-    </a>
-    |
-    <a href="https://drive.google.com/file/d/1bdYi--odkqzKs8DWvCNNB41fpt-e8EYe/view?usp=sharing" target="_blank">
-      ⬇ ডাউনলোড
-    </a>
+  <div class="folder" onclick="toggle('m2')">🎬 Demon Slayer Kimetsu no Yaiba Infinity Castle</div>
+  <div class="subfolder" id="m2">
+    <div class="link unlock">
+      <a href="https://drive.google.com/file/d/1bdYi--odkqzKs8DWvCNNB41fpt-e8EYe/preview?usp=sharing" target="_blank">▶ ভিডিও দেখো</a> |
+      <a href="https://drive.google.com/file/d/1bdYi--odkqzKs8DWvCNNB41fpt-e8EYe/view?usp=sharing" target="_blank">⬇ ডাউনলোড</a>
+    </div>
   </div>
-</div>
 
-<div class="folder" onclick="toggle('m3')">🎬 Exhuma 2024</div>
-<div class="subfolder" id="m3">
-  <div class="link unlock">
-    <a href="https://drive.google.com/file/d/1MU8aML8sps-5LBfoEaQPwcJYgQH0TuyV/preview?usp=sharing" target="_blank">
-      ▶ ভিডিও দেখো
-    </a>
-    |
-    <a href="https://drive.google.com/file/d/1MU8aML8sps-5LBfoEaQPwcJYgQH0TuyV/view?usp=sharing" target="_blank">
-      ⬇ ডাউনলোড
-    </a>
-  </div>
-</div>
-
-<!-- আরও মুভি একইভাবে রাখতে হবে -->
+</div> <!-- #movies end -->
 
 <!-- AI Button -->
 <button id="aiBtn" onclick="toggleAI()">AI</button>
@@ -137,28 +120,40 @@ const PASSWORD = "SIAM2025";
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyVYLvydsrfz9xrxZ29QizJfDL6HhynrgI7M9tQ_teql6Yz7ZQ_5n_vbpRQs6g5AcER/exec";
 const OMDB_KEY = "ac57015f";
 
+// Toggle subfolders
 function toggle(id){ let e=document.getElementById(id); e.style.display=e.style.display==="block"?"none":"block"; }
 
+// Unlock function
 function unlockAll(){
   let p=document.getElementById("passInput").value;
   if(p===PASSWORD){
     localStorage.setItem("ok","1");
     document.querySelectorAll(".unlock").forEach(e=>e.style.display="block");
     document.getElementById("paymentBox").style.display="none";
-    document.getElementById("searchBox").style.display="block"; 
-    document.getElementById("aiBtn").style.display="block"; // AI Active
-  }else{ alert("ভুল পাসওয়ার্ড"); }
+    document.getElementById("searchBox").style.display="block";
+    document.getElementById("aiBtn").style.display="block";
+
+    // Show all folders
+    document.querySelectorAll(".folder").forEach(f=>f.style.display="block");
+
+  }else{
+    alert("ভুল পাসওয়ার্ড");
+  }
 }
 
+// Auto unlock if previously unlocked
 if(localStorage.getItem("ok")){
   document.querySelectorAll(".unlock").forEach(e=>e.style.display="block");
   document.getElementById("paymentBox").style.display="none";
-  document.getElementById("searchBox").style.display="block"; 
-  document.getElementById("aiBtn").style.display="block"; 
+  document.getElementById("searchBox").style.display="block";
+  document.getElementById("aiBtn").style.display="block";
+  document.querySelectorAll(".folder").forEach(f=>f.style.display="block");
 }
 
+// Toggle password visibility
 function togglePassword(){ let i=document.getElementById("passInput"); i.type=i.type==="password"?"text":"password"; }
 
+// Search functionality
 function searchItem(){
   let q=document.getElementById("searchBox").value.toLowerCase();
   document.querySelectorAll(".folder").forEach(item=>{
@@ -166,6 +161,7 @@ function searchItem(){
   });
 }
 
+// Email submit
 document.getElementById("emailForm").onsubmit=function(e){
   e.preventDefault();
   fetch(SCRIPT_URL,{
@@ -196,7 +192,7 @@ async function askAI(){
   try{
     const r=await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(q)}&apikey=${OMDB_KEY}`);
     const d=await r.json();
-    if(d.Response==="False"){ res.innerHTML="মুভি পাওয়া যায়নি ❌"; return; }
+    if(d.Response==="False"){ res.innerHTML="মুভি পাওয়া যায়নি ❌নাম ঠিক লেখো"; return; }
 
     let plotBN = await translateBN(d.Plot);
     let poster = d.Poster && d.Poster !== "N/A" ? d.Poster : "https://via.placeholder.com/200x300?text=No+Image";
