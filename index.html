@@ -1,0 +1,269 @@
+﻿<meta name='viewport' content='width=device-width, initial-scale=1'/>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie & Game Drive</title>
+<style>
+body{font-family:Arial;background:#f1f5f9;padding:20px}
+h1{text-align:center}
+.folder{background:#0ea5e9;color:#fff;padding:8px;margin:6px 0;border-radius:6px;cursor:pointer}
+.subfolder{display:none;margin-left:20px}
+.link{display:none;margin:6px 0}
+.payment-box{background:#fef3c7;padding:15px;border-radius:10px;text-align:center;margin-bottom:20px}
+button{background:#22c55e;border:none;color:white;padding:8px 14px;border-radius:6px;cursor:pointer}
+input{padding:8px;width:180px}
+.show-pass-btn{background:#3b82f6;color:#fff;border:none;padding:8px;border-radius:6px}
+a{text-decoration:none;font-weight:bold}
+#searchBox{display:none;margin:15px 0;padding:8px;width:95%}
+
+/* AI Button */
+#aiBtn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:#22c55e;
+  color:#fff;
+  font-size:18px;
+  border:none;
+  cursor:pointer;
+  display:none;
+  z-index:999;
+}
+
+/* AI Box */
+#aiBox{
+  position:fixed;
+  bottom:90px;
+  right:20px;
+  width:300px;
+  background:#fff;
+  border-radius:12px;
+  padding:12px;
+  box-shadow:0 0 15px rgba(0,0,0,.2);
+  display:none;
+  z-index:999;
+}
+#aiBox input{
+  width:100%;
+  margin-bottom:8px;
+}
+#aiResult{
+  font-size:14px;
+  max-height:200px;
+  overflow:auto;
+}
+</style>
+</head>
+<body>
+
+<h1>📂 SIAM</h1>
+
+<div class="payment-box" id="paymentBox">
+<h3>🔐 সাবস্ক্রিপশন</h3>
+bKash / Nagad: 01775487928 <br>
+Amount: 5 টাকা <br><br>
+
+<input type="password" id="passInput" placeholder="পাসওয়ার্ড দিন">
+<button class="show-pass-btn" onclick="togglePassword()">👁</button><br><br>
+<button onclick="unlockAll()">Access</button>
+
+<hr>
+
+<h4>📧 পাসওয়ার্ড পেতে ইমেইল দিন</h4>
+<form id="emailForm">
+<input type="email" name="email" required placeholder="আপনার ইমেইল">
+<br><br>
+<button type="submit">Send</button>
+</form>
+</div>
+
+<!-- Search bar -->
+<input type="text" id="searchBox" placeholder="🔍 Movie / Series খুঁজুন..." onkeyup="searchItem()">
+
+<!-- Movies -->
+<div class="folder" onclick="toggle('movies')">🎬 মুভি</div>
+<div class="subfolder" id="movies">
+
+  <div class="folder" onclick="toggle('m1')">🎬 Chainsaw Man The Movie Reze Arc</div>
+  <div class="subfolder" id="m1">
+    <div class="link unlock">
+      <a href="https://drive.google.com/file/d/1iGwkL4uV_bWVWlUMjtw7ZQ32wmr4W8c1/preview?usp=sharing">▶ ভিডিও দেখো</a> | <a href="https://drive.google.com/file/d/1iGwkL4uV_bWVWlUMjtw7ZQ32wmr4W8c1/view?usp=sharing">⬇ ডাউনলোড</a>
+    </div>
+  </div>
+
+<div class="folder" onclick="toggle('m2')">🎬 Demon Slayer Kimetsu no Yaiba Infinity Castle</div>
+<div class="subfolder" id="m2">
+  <div class="link unlock">
+    <a href="https://drive.google.com/file/d/1bdYi--odkqzKs8DWvCNNB41fpt-e8EYe/preview?usp=sharing" target="_blank">
+      ▶ ভিডিও দেখো
+    </a>
+    |
+    <a href="https://drive.google.com/file/d/1bdYi--odkqzKs8DWvCNNB41fpt-e8EYe/view?usp=sharing" target="_blank">
+      ⬇ ডাউনলোড
+    </a>
+  </div>
+</div>
+
+<div class="folder" onclick="toggle('m3')">🎬 Exhuma 2024</div>
+<div class="subfolder" id="m3">
+  <div class="link unlock">
+    <a href="https://drive.google.com/file/d/1MU8aML8sps-5LBfoEaQPwcJYgQH0TuyV/preview?usp=sharing" target="_blank">
+      ▶ ভিডিও দেখো
+    </a>
+    |
+    <a href="https://drive.google.com/file/d/1MU8aML8sps-5LBfoEaQPwcJYgQH0TuyV/view?usp=sharing" target="_blank">
+      ⬇ ডাউনলোড
+    </a>
+  </div>
+</div>
+
+<div class="folder" onclick="toggle('m4')">🎬 Frankenstein 2025</div>
+<div class="subfolder" id="m4">
+  <div class="link unlock">
+    <a href="https://drive.google.com/file/d/1NoR0nWvk9MWorrKrXM3ylELt4bLxT07i/preview?usp=sharing" target="_blank">
+      ▶ ভিডিও দেখো
+    </a>
+    |
+    <a href="https://drive.google.com/file/d/1NoR0nWvk9MWorrKrXM3ylELt4bLxT07i/view?usp=sharing" target="_blank">
+      ⬇ ডাউনলোড
+    </a>
+  </div>
+</div>
+
+<div class="folder" onclick="toggle('m5')">🎬 Haq (2025) Hindi</div>
+<div class="subfolder" id="m5">
+  <div class="link unlock">
+    <a href="https://drive.google.com/file/d/1pLxdBeSlirH5e_PEfPCP9ycg68z-jMia/preview?usp=sharing" target="_blank">
+      ▶ ভিডিও দেখো
+    </a>
+    |
+    <a href="https://drive.google.com/file/d/1pLxdBeSlirH5e_PEfPCP9ycg68z-jMia/view?usp=sharing" target="_blank">
+      ⬇ ডাউনলোড
+    </a>
+  </div>
+</div>
+
+<div class="folder" onclick="toggle('m6')">🎬 Jolly LLB 3 (2025) Hindi</div>
+<div class="subfolder" id="m6">
+  <div class="link unlock">
+    <a href="https://drive.google.com/file/d/16TXCdK4Tkj9P6fMtX7zZb3b8fx4ou0rz/preview?usp=sharing" target="_blank">
+      ▶ ভিডিও দেখো
+    </a>
+    |
+    <a href="https://drive.google.com/file/d/16TXCdK4Tkj9P6fMtX7zZb3b8fx4ou0rz/view?usp=sharing" target="_blank">
+      ⬇ ডাউনলোড
+    </a>
+  </div>
+</div>
+
+<div class="folder" onclick="toggle('m7')">🎬 The Nun (2018) </div>
+<div class="subfolder" id="m7">
+  <div class="link unlock">
+    <a href="https://drive.google.com/file/d/1s5dYeXfk0m4PT9KDbeoX7xC9egfBqV5-/preview?usp=sharing" target="_blank">
+      ▶ ভিডিও দেখো
+    </a>
+    |
+    <a href="https://drive.google.com/file/d/1s5dYeXfk0m4PT9KDbeoX7xC9egfBqV5-/view?usp=sharing" target="_blank">
+      ⬇ ডাউনলোড
+    </a>
+  </div>
+</div>
+
+<div class="folder" onclick="toggle('m8')">🎬 দুই ষ   e1</div>
+<div class="subfolder" id="m8">
+  <div class="link unlock">
+    <a href="https://drive.google.com/file/d/1e6tUTrjyB0HNRCiUKyUpoav2XuwDZ6kS/preview?usp=sharing" target="_blank">
+      ▶ ভিডিও দেখো
+    </a>
+    |
+    <a href="https://drive.google.com/file/d/1e6tUTrjyB0HNRCiUKyUpoav2XuwDZ6kS/view?usp=sharing" target="_blank">
+      ⬇ ডাউনলোড
+    </a>
+  </div>
+</div>
+
+<!-- AI Button -->
+<button id="aiBtn" onclick="toggleAI()">AI</button>
+<div id="aiBox">
+  <input type="text" id="aiInput" placeholder="মুভির নাম লিখুন">
+  <button onclick="askAI()">Search</button>
+  <div id="aiResult"></div>
+</div>
+
+<script>
+const PASSWORD = "SIAM2025";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyVYLvydsrfz9xrxZ29QizJfDL6HhynrgI7M9tQ_teql6Yz7ZQ_5n_vbpRQs6g5AcER/exec";
+const OMDB_KEY = "ac57015f";
+
+function toggle(id){ let e=document.getElementById(id); e.style.display=e.style.display==="block"?"none":"block"; }
+
+function unlockAll(){
+  let p=document.getElementById("passInput").value;
+  if(p===PASSWORD){
+    localStorage.setItem("ok","1");
+    document.querySelectorAll(".unlock").forEach(e=>e.style.display="block");
+    document.getElementById("paymentBox").style.display="none";
+    document.getElementById("searchBox").style.display="block"; 
+    document.getElementById("aiBtn").style.display="block"; // AI Active
+  }else{ alert("ভুল পাসওয়ার্ড"); }
+}
+
+if(localStorage.getItem("ok")){
+  document.querySelectorAll(".unlock").forEach(e=>e.style.display="block");
+  document.getElementById("paymentBox").style.display="none";
+  document.getElementById("searchBox").style.display="block"; 
+  document.getElementById("aiBtn").style.display="block"; 
+}
+
+function togglePassword(){ let i=document.getElementById("passInput"); i.type=i.type==="password"?"text":"password"; }
+
+function searchItem(){
+  let q=document.getElementById("searchBox").value.toLowerCase();
+  document.querySelectorAll(".folder").forEach(item=>{
+    item.style.display=item.innerText.toLowerCase().includes(q)?"block":"none";
+  });
+}
+
+document.getElementById("emailForm").onsubmit=function(e){
+  e.preventDefault();
+  fetch(SCRIPT_URL,{
+    method:"POST",
+    body:new URLSearchParams({email:this.email.value})
+  })
+  .then(()=>{ alert("ধন্যবাদ 🙏 আপনার ইমেইলে দ্রুত পাসওয়ার্ড পাঠানো হবে"); })
+  .catch(()=>{ alert("সমস্যা হয়েছে, পরে চেষ্টা করুন"); });
+  this.reset();
+};
+
+// AI Functions
+function toggleAI(){ let box=document.getElementById("aiBox"); box.style.display = box.style.display==="block"?"none":"block"; }
+
+async function translateBN(text){
+  const r = await fetch(
+    `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=bn&dt=t&q=${encodeURIComponent(text)}`
+  );
+  const d = await r.json();
+  return d[0].map(x=>x[0]).join("");
+}
+
+async function askAI(){
+  let q=document.getElementById("aiInput").value;
+  if(!q) return;
+  let res=document.getElementById("aiResult");
+  res.innerHTML="AI চিন্তা করছে... 🤖";
+  try{
+    const r=await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(q)}&apikey=${OMDB_KEY}`);
+    const d=await r.json();
+    if(d.Response==="False"){ res.innerHTML="মুভি পাওয়া যায়নি ❌"; return; }
+    let plotBN = await translateBN(d.Plot);
+    res.innerHTML=`<b>${d.Title} (${d.Year})</b><br><b>অভিনেতা:</b> ${d.Actors}<br><br><b>প্লট:</b> ${plotBN}`;
+  }catch(e){ res.innerHTML="ত্রুটি ঘটেছে ❌"; console.error(e); }
+}
+</script>
+</body>
+</html>
